@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printer Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <!-- Top Navbar -->
+    <header class="border-b">
+        <div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
+            <!-- Left: Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="https://storage.googleapis.com/a1aa/image/d5c27842-5f28-4f1b-0df9-1ad19c57b756.jpg"
+                    alt="HP Logo" class="w-10">
+
+            </div>
+
+            <!-- Right: Search + Call + Toggle -->
+            <div class="flex items-center space-x-4">
+                <!-- Search (desktop only) -->
+                <form class="relative hidden sm:block">
+                    <input type="text" placeholder="Search HP Support"
+                        class="border rounded-full px-3 py-1 text-sm focus:ring-2 focus:ring-blue-600">
+                    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+
+                <!-- Call button -->
+                <a onclick="callNow()"
+                    class="hidden md:inline-block border px-4 py-1 cursor-pointer text-md font-semibold rounded bg-blue-600 text-white hover:bg-blue-500">+1-877-868-3130</a>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-gray-700 text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-50 border-t">
+            <ul class="flex flex-col space-y-3 py-4 px-6 text-gray-700 text-sm font-medium">
+
+                <li class="border-t pt-3"><a onclick="callNow()" class="block font-semibold text-blue-600"><i
+                            class="fas fa-phone-alt mr-1 rotate-90"></i>+1-877-868-3130</a></li>
+
+            </ul>
+        </div>
+    </header>
+
+
+
+    <!-- Setup / Processing / Error Section (All Steps in One Flow) -->
+
+    <section class="relative bg-gradient-to-r from-blue-50 to-white py-16">
+        <div id="setupContainer" class="max-w-3xl mx-auto px-6 text-center bg-white rounded-lg shadow-lg p-8">
+
+            <!-- Step 1: Setup Form -->
+            <div id="setupForm">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3">Set up your HP printer</h2>
+                <p class="text-gray-600 mb-6 text-sm md:text-base">
+                    Enter your HP product name and model number to get the right HP Smart software and drivers for you
+                </p>
+
+                <!-- Input -->
+                <input type="text" id="serialInput"
+                    placeholder='Enter your product name here. Example: "OfficeJet 9010"'
+                    class="w-full border rounded px-4 py-3 mb-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none">
+
+                <!-- Next Button -->
+                <button onclick="startProcess()"
+                    class="w-full md:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
+                    Next
+                </button>
+
+                <!-- Help Links -->
+                <div class="flex flex-col md:flex-row justify-between items-center mt-6 space-y-3 md:space-y-0 text-sm">
+                    <a href="#" class="text-blue-600 hover:underline">Where's the product name?</a>
+                    <a href="#" class="text-blue-600 hover:underline">My device is not listed</a>
+                </div>
+            </div>
+
+            <!-- Step 2: Processing -->
+            <div id="processingSection" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Downloading Printer Software...</h2>
+                <img src="https://i.ibb.co/6JJmkrKD/pngtree-black-plastic-office-printer-printing-a-paper-page-png-image-2302044-removebg-preview.png" alt="Printer Icon"
+                    class="mx-auto w-32 mb-6">
+
+                <!-- Progress bar -->
+                <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
+                    <div id="progressBar"
+                        class="bg-blue-600 h-6 text-xs text-white flex items-center justify-center transition-all duration-200"
+                        style="width: 0%">
+                        0%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Error -->
+            <div id="errorSection" class="hidden text-center bg-red-50 border border-red-300 rounded mt-8 p-6">
+                <h2 class="text-xl font-bold text-red-700 mb-3">⚠️ Action Needed: Printer Issue Detected!</h2>
+                <p class="text-gray-700 mb-4">
+                    We couldn't complete your request due to the following reasons:
+                </p>
+                <ul class="text-left list-disc list-inside text-sm text-gray-800 mb-4">
+                    <li>Printer driver Installation Failed due to <b>Fatal Error C0000022</b>.</li>
+                    <li>Your device firewall may be blocking the installation process.</li>
+                    <li>Your computer registry file is corrupted.</li>
+                </ul>
+                <p class="mb-4 text-gray-700">To resolve this issue, contact our Customer Support Team right now.</p>
+                <a onclick="callNow()"
+                    class="inline-block px-6 cursor-pointer py-3 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700 transition">
+                    📞 Call for Support (Toll Free): +1-877-868-3130
+                </a>
+                <p class="mt-4 text-xs text-gray-500">
+                    We appreciate your patience and are here to help you get connected as quickly as possible.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-2xl font-semibold mb-6">HP Printer Support</h1>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <a href="#" class="flex flex-col items-center justify-center border rounded-lg p-4 hover:shadow">
+                <i class="fas fa-download text-blue-600 text-2xl mb-2"></i>
+                <span class="text-sm">Download drivers</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center border rounded-lg p-4 hover:shadow">
+                <i class="fas fa-shield-alt text-blue-600 text-2xl mb-2"></i>
+                <span class="text-sm">Check warranty status</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center border rounded-lg p-4 hover:shadow">
+                <i class="fas fa-headset text-blue-600 text-2xl mb-2"></i>
+                <span class="text-sm">Contact us</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center border rounded-lg p-4 hover:shadow">
+                <i class="fas fa-robot text-blue-600 text-2xl mb-2"></i>
+                <span class="text-sm">Ask our Virtual Assistant</span>
+            </a>
+        </div>
+
+    </section>
+
+    <!-- Footer Disclaimer -->
+    <footer class="bg-black text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 py-8 text-center space-y-4">
+            <h4 class="text-white font-semibold text-sm">Disclaimer</h4>
+            <p class="max-w-3xl mx-auto leading-relaxed">
+                We are an independent third-party service provider for HP printer support.
+                HP, the HP logo, and all related product names are trademarks of HP Inc.
+                We are not directly associated with HP. Services provided may also be
+                available for free on the official HP website.
+            </p>
+            <p>©2025 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+
+
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuBtn.innerHTML = mobileMenu.classList.contains("hidden")
+                ? '<i class="fas fa-bars"></i>'
+                : '<i class="fas fa-times"></i>';
+        });
+
+
+
+        function startProcess() {
+            const serial = document.getElementById("serialInput").value.trim();
+            if (!serial) {
+                alert("Please enter your printer product name or serial number!");
+                return;
+            }
+
+            // Step 1 → hide, Step 2 → show
+            document.getElementById("setupForm").classList.add("hidden");
+            document.getElementById("processingSection").classList.remove("hidden");
+
+            let progress = 0;
+            const progressBar = document.getElementById("progressBar");
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    // Step 2 → hide, Step 3 → show
+                    document.getElementById("processingSection").classList.add("hidden");
+                    document.getElementById("errorSection").classList.remove("hidden");
+                } else {
+                    progress++;
+                    progressBar.style.width = progress + "%";
+                    progressBar.innerText = progress + "%";
+                }
+            }, 50); // ~5 seconds
+        }
+
+        function callNow() {
+            window.location.href = 'tel:+1-877-868-3130';
+        }
+
+
+    </script>
+
+</body>
+
+</html>
